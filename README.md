@@ -13,7 +13,7 @@
 - Boas praticas e Clean Code
 
 
-# Solução
+## Solução
 Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
 
 
