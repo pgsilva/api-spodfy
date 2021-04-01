@@ -8,12 +8,11 @@
 
 
 ## Objetivo
-    - Aprendizado e fixação da linguagem Kotlin
-    - Boas praticas e Clean Code
+- Aprendizado e fixação da linguagem Kotlin
+- Boas praticas e Clean Code
 
 
 # Solução
-    Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil
-    e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
+Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
 
-    A ideia é sempre notificar o usuario que um de seus podcasts favoritos saiu e notifica-lo.
+A ideia é sempre notificar o usuario que um de seus podcasts favoritos saiu e notifica-lo.
