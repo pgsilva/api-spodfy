@@ -16,6 +16,5 @@
 # Solução
 Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
 
-A ideia é sempre notificar o usuario que um de seus podcasts favoritos saiu e notifica-lo.
 
 ![PodPah](https://pbs.twimg.com/profile_images/1307559712179867652/fGttBmX__200x200.jpg)
