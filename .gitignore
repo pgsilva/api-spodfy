@@ -23,3 +23,7 @@
 hs_err_pid*
 
 spodfy/src/main/kotlin/com/dojo/spodfy/util/SpotifyApiData.kt
+
+.idea/
+
+data/testdb.mv.db
