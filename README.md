@@ -1,7 +1,5 @@
-![Spotify](https://developer.spotify.com/assets/FBImage.png)
-
-
 # Spodfy
+![Spotify](https://developer.spotify.com/assets/FBImage.png)
 
 [![Kotlin](https://img.shields.io/badge/kotlin-1.4.32-blue.svg?logo=kotlin&style=for-the-badge)](http://kotlinlang.org)
 [![Miles Morales](https://img.shields.io/badge/dev-miles%20morales-orange?style=for-the-badge)](https://github.com/pgsilva)
