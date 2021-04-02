@@ -1,5 +1,6 @@
 # Spodfy
 
+
 [![Kotlin](https://img.shields.io/badge/kotlin-1.4.32-blue.svg?logo=kotlin&style=for-the-badge)](http://kotlinlang.org)
 [![Miles Morales](https://img.shields.io/badge/dev-miles%20morales-orange?style=for-the-badge)](https://github.com/pgsilva)
 [![Git Hub Stars](https://img.shields.io/github/stars/pgsilva?logo=github&style=for-the-badge)](https://github.com/pgsilva/api-spodfy-kotlin)
@@ -8,12 +9,12 @@
 
 
 ## Objetivo
-    - Aprendizado e fixação da linguagem Kotlin
-    - Boas praticas e Clean Code
+- Aprendizado e fixação da linguagem Kotlin
+- Boas praticas e Clean Code
 
 
-# Solução
-    Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil
-    e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
+## Solução
+Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
 
-    A ideia é sempre notificar o usuario que um de seus podcasts favoritos saiu e notifica-lo.
+
+
