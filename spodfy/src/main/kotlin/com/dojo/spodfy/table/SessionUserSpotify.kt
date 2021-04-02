@@ -1,16 +1,21 @@
 package com.dojo.spodfy.table
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Table
+import javax.persistence.*
 
-
-@Table("SESSIONUSERSPOTIFY")
+@Entity
 data class SessionUserSpotify(
-    @Id var id: Long?,
-    val nr_ip_user: String?,
-    var access_token: String?,
-    val token_type: String?,
-    var expires_in: Long?,
-    var refresh_token: String?,
-    val scope: String?,
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(insertable = false, updatable = false)
+    var idSessionUserSpotify: Long? = 0,
+    var nrIpUser: String? = "",
+    var accessToken: String? = "",
+    var tokenType: String? = "",
+    var expiresIn: Long? = 0,
+    var refreshToken: String? = "",
+    var scope: String? = "",
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = arrayOf(CascadeType.PERSIST))
+    @JoinColumn(name = "idUsuario")
+    var usuario: Usuario? = null,
 )

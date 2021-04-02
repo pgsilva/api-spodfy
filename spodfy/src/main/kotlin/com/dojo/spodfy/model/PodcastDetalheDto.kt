@@ -1,10 +1,10 @@
 package com.dojo.spodfy.model
 
-data class PodcastDetalhe(
+data class PodcastDetalheDto(
     val available_markets: List<String>?,
     val copyrights: List<String>?,
     val description: String?,
-    val episodes: EpisodioDetalhe?,
+    val episodes: EpisodioDetalheDto?,
     val is_externally_hosted: Boolean?,
     val languages: List<String>?,
     val media_type: String?,

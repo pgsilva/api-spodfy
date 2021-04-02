@@ -1,7 +1,7 @@
 package com.dojo.spodfy.model
 
 
-class Episodio(
+class EpisodioDto(
     val audio_preview_url: String?,
     val description: String?,
     val duration_ms: Int?,
@@ -10,7 +10,7 @@ class Episodio(
     val external_urls: Map<String, String>?,
     val href: String?,
     val id: String?,
-    val images: List<ImagemSpotify>?,
+    val images: List<ImagemSpotifyDto>?,
     val is_externally_hosted: Boolean?,
     val is_playable: Boolean?,
     val language: String?,

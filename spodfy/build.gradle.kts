@@ -5,12 +5,14 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.4.31"
     kotlin("plugin.spring") version "1.4.31"
-    kotlin("plugin.allopen") version "1.3.61"
+    kotlin("plugin.jpa") version "1.4.31"
 }
 allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.Embeddable")
     annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.ManyToOne")
+    annotation("javax.persistence.JoinColumn")
 }
 
 group = "com.dojo"
@@ -25,6 +27,7 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

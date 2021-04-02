@@ -1,6 +1,6 @@
 package com.dojo.spodfy.model
 
-data class TokenSpotifyApi(
+data class TokenSpotifyApiDto(
     val access_token: String? = null,
     val token_type: String? = null,
     val expires_in: Long? = null,

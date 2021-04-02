@@ -32,5 +32,11 @@ class SpotifyRequestUtil() {
         )
     }
 
+    fun preparaBodyRequisicaoTokenCredentialsID(): List<Pair<String, String?>>? {
+        return listOf(
+            "grant_type" to "client_credentials"
+        )
+    }
+
 
 }

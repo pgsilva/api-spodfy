@@ -1,8 +1,8 @@
 package com.dojo.spodfy.model
 
-data class Pesquisa(
+data class PesquisaDto(
     val href: String?,
-    val items: List<PodcastsPesquisa>?,
+    val items: List<PodcastPesquisaDto>?,
     val limit: Int?,
     val next: String?,
     val offset: Int?,

@@ -2,20 +2,22 @@ package com.dojo.spodfy.repository
 
 import com.dojo.spodfy.table.SessionUserSpotify
 import org.springframework.data.jdbc.repository.query.Modifying
-import org.springframework.data.jdbc.repository.query.Query
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.transaction.annotation.Transactional
 
-interface SessionUserRepository : CrudRepository<SessionUserSpotify, String> {
+interface SessionUserRepository : JpaRepository<SessionUserSpotify, Long> {
 
     @Transactional
     @Modifying
-    @Query("delete from SESSIONUSERSPOTIFY s where s.nr_ip_user = :nrIpUser")
-    fun deleteByIp(@Param("nrIpUser") nrIpUser: String?)
+//  @Query("delete from SessionUserSpotify s where s.usuario.idUsuario = :idUsuario")
+    fun deleteByUsuarioIdUsuario(@Param("idUsuario") idUsuario: Long?)
 
-    @Query("select * from SESSIONUSERSPOTIFY s where s.nr_ip_user = :nrIpUser ")
-    fun findbyNrIpUser(@Param("nrIpUser") nrIpUser: String?): SessionUserSpotify?
+    //@Query("select * from SessionUserSpotify s where s.nrIpUser = :nrIpUser ")
+    //fun findByNrIpUser(@Param("nrIpUser") nrIpUser: String?): SessionUserSpotify?
+
+    fun findByUsuarioIdUsuario(idUsuario: Long?): SessionUserSpotify?
+    fun findByNrIpUser(s: String): SessionUserSpotify?
 
 
 }

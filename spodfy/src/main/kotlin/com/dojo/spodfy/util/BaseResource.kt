@@ -1,4 +1,4 @@
-package com.dojo.spodfy.resource
+package com.dojo.spodfy.util
 
 import org.springframework.beans.factory.annotation.Autowired
 import javax.servlet.http.HttpServletRequest

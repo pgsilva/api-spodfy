@@ -1,10 +1,12 @@
 package com.dojo.spodfy.resource.api.spotify
 
-import com.dojo.spodfy.resource.BaseResource
+import com.dojo.spodfy.util.BaseResource
 import com.dojo.spodfy.service.api.spotify.SpotifyService
 import com.dojo.spodfy.table.SessionUserSpotify
+import com.dojo.spodfy.table.Usuario
 import com.dojo.spodfy.util.SPOTIFY_CLIENT_ID
 import com.dojo.spodfy.util.SPOTIFY_REDIRECT_URI
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URLEncoder
@@ -14,12 +16,10 @@ import java.nio.charset.StandardCharsets
 @RestController
 class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
 
-    @RequestMapping(value = ["/redirect_login"], method = [RequestMethod.GET])
+    @GetMapping("/redirect_login")
     fun redirectLoginSpotify(): ResponseEntity<Any>? {
         val scopes: String =
-            "user-read-private user-read-email " +
-                    "user-read-playback-state user-modify-playback-state " +
-                    "user-read-currently-playing streaming app-remote-control "
+            "user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing streaming app-remote-control "
 
         var projectUrl: String? = "https://accounts.spotify.com/authorize?response_type=code"
         projectUrl += "&client_id=$SPOTIFY_CLIENT_ID"
@@ -40,7 +40,7 @@ class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
         @RequestParam code: String?,
         @RequestParam(required = false) error: String?,
         @RequestParam(required = false) state: String?
-    ): ResponseEntity<String?>? {
+    ): ResponseEntity<Usuario>? {
         return try {
             if (!error.isNullOrEmpty())
                 throw Exception("Ocorreu um erro ao recuperar permissão.")
@@ -48,11 +48,14 @@ class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
             ResponseEntity.ok(spotifyService.atualizaPermissaoUsuarioLogado(code, getNrIpAdress()))
         } catch (e: Exception) {
             e.printStackTrace()
-            ResponseEntity.badRequest().body(e.localizedMessage)
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
         }
     }
 
-    @GetMapping("/all_sessions")
-    fun findAllSessionUsers(): List<SessionUserSpotify> = spotifyService.findAllSessionUsers()
+    @GetMapping("/sessoes")
+    fun buscarTodasAsSessionsUsers(): List<SessionUserSpotify> = spotifyService.buscarTodasAsSessionsUsers()
 
+    @GetMapping("/sessoes/usuario/{idUsuario}")
+    fun buscarTodasAsSessionsUsersPorUsuarioId(@PathVariable idUsuario: Long): SessionUserSpotify? =
+        spotifyService.buscarSessionUserPorUsuarioId(idUsuario)
 }
