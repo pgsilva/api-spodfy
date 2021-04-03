@@ -35,6 +35,18 @@ class AcompanhamentoResource(val acompanhamentoService: AcompanhamentoService) :
         }
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    fun listarTodosAcompanhamentosPorUsuarioID(
+        @PathVariable idUsuario: Long
+    ): ResponseEntity<List<Acompanhamento?>>? {
+        return try {
+            ResponseEntity.ok(acompanhamentoService.listarTodosAcompanhamentosPorUsuarioID(idUsuario))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
+        }
+    }
+
     @PutMapping("/usuario/{idUsuario}")
     fun atualizarAcompanhamento(
         @RequestBody dto: AcompanhamentoDto,

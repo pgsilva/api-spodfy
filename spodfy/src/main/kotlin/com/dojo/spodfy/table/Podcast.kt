@@ -21,4 +21,9 @@ data class Podcast(
 
     //validar se corresponde quando um novo é adicionado pela API
     var totalEpisodios: Long? = 0,
-)
+) {
+    fun nomeLower(): String? {
+        return this.nome?.toLowerCase()
+
+    }
+}

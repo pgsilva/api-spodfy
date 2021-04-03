@@ -19,7 +19,15 @@ class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
     @GetMapping("/redirect_login")
     fun redirectLoginSpotify(): ResponseEntity<Any>? {
         val scopes: String =
-            "user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing streaming app-remote-control "
+            "user-read-private " +
+                    "user-read-email " +
+                    "user-read-playback-state " +
+                    "user-modify-playback-state " +
+                    "user-read-currently-playing " +
+                    "streaming app-remote-control " +
+                    "user-follow-read " +
+                    "user-top-read " +
+                    "user-library-read"
 
         var projectUrl: String? = "https://accounts.spotify.com/authorize?response_type=code"
         projectUrl += "&client_id=$SPOTIFY_CLIENT_ID"

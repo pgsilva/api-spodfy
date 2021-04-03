@@ -11,6 +11,9 @@ import com.dojo.spodfy.util.SPOTIFY_API_TOKEN
 import com.dojo.spodfy.util.SPOTIFY_MESSAGE_LOGIN
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
+import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.core.Response
+import com.github.kittinunf.fuel.core.ResponseResultOf
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import org.springframework.stereotype.Service
@@ -99,5 +102,53 @@ class SpotifyService(val db: SessionUserRepository, val dbUsuario: UsuarioReposi
 
     fun buscarSessionUserPorUsuarioId(idUsuario: Long): SessionUserSpotify? {
         return db.findByUsuarioIdUsuario(idUsuario)
+    }
+
+    fun tratarResponse(
+        response: Response,
+        request: Request,
+        sessionUser: SessionUserSpotify?
+    ): ResponseResultOf<String> {
+        when (response.statusCode) {
+            HttpStatus.BAD_REQUEST.value() -> throw Exception("Response Spotify Api: ${response.data}")
+            HttpStatus.UNAUTHORIZED.value() -> {
+                //refresh token pls
+                val newToken: String? = atualizarTokenDeAcesso(sessionUser)
+                request[Headers.AUTHORIZATION] = "Bearer $newToken"
+
+                return request.responseString()
+            }
+        }
+
+        return request.responseString()
+    }
+
+    private fun atualizarTokenDeAcesso(sessionUser: SessionUserSpotify?): String? {
+        val refreshToken = sessionUser?.refreshToken ?: throw Exception("Token expirado, necessario login novamente")
+
+        val (_, response, result) = Fuel.post(
+            SPOTIFY_API_TOKEN,
+            util.preparaBodyRequisicaoRefreshToken(refreshToken)
+        )
+            .header(Headers.CONTENT_TYPE, "application/x-www-form-urlencoded")
+            .header(Headers.AUTHORIZATION, util.prepararHeaderCredentialsID())
+            .responseString()
+
+        when (result) {
+            is Result.Success -> {
+                // requisicao ocorreu com sucesso, transformar em um objeto e salvar
+                val tokenDto: TokenSpotifyApiDto = gson.fromJson(result.get(), TokenSpotifyApiDto::class.java)
+
+                sessionUser.accessToken = tokenDto.access_token
+                sessionUser.refreshToken = tokenDto.refresh_token
+                sessionUser.expiresIn = tokenDto.expires_in
+                db.save(sessionUser)
+
+
+            }
+            else -> throw Exception("Response Spotify Api: ${response.data}")
+        }
+
+        return sessionUser.accessToken
     }
 }

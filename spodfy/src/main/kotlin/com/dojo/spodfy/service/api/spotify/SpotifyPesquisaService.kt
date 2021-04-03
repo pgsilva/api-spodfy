@@ -5,6 +5,7 @@ import com.dojo.spodfy.model.PesquisaSpotifyApiDto
 import com.dojo.spodfy.model.PodcastDetalheDto
 import com.dojo.spodfy.model.TokenSpotifyApiDto
 import com.dojo.spodfy.repository.SessionUserRepository
+import com.dojo.spodfy.service.AcompanhamentoService
 import com.dojo.spodfy.table.SessionUserSpotify
 import com.dojo.spodfy.util.SPOTIFY_API_SEARCH
 import com.dojo.spodfy.util.SPOTIFY_API_SEARCH_PAGE
@@ -17,6 +18,7 @@ import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.core.ResponseResultOf
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
@@ -26,18 +28,22 @@ class SpotifyPesquisaService(val db: SessionUserRepository) {
     private val gson = Gson()
     private val util: SpotifyRequestUtil = SpotifyRequestUtil()
 
+    @set:Autowired
+    lateinit var spotifyService: SpotifyService
+
+
     /**
      * @apiNote Esse meteodo identifica o usuario e faz a requisicao para a API do Spotify para buscar os podcast
      */
     fun pesquisarPodcasts(keyword: String?, idUsuario: Long?): PesquisaSpotifyApiDto? {
         val sessionUser: SessionUserSpotify? = db.findByUsuarioIdUsuario(idUsuario)
 
-        val (request, response, result) = Fuel.get("$SPOTIFY_API_SEARCH?q=$keyword&type=show&market=BR")
+        val (request, response, result) = Fuel.get("$SPOTIFY_API_SEARCH?q=$keyword&type=show&market=BR&include_external=N")
             .header(Headers.AUTHORIZATION, "Bearer ${sessionUser?.accessToken}")
             .responseString()
 
         if (response.statusCode != HttpStatus.OK.value()) {
-            val refreshResponse = tratarResponse(response, request, sessionUser)
+            val refreshResponse = spotifyService.tratarResponse(response, request, sessionUser)
             println(refreshResponse.third.get())
             return gson.fromJson(refreshResponse.third.get(), PesquisaSpotifyApiDto::class.java)
         }
@@ -54,7 +60,7 @@ class SpotifyPesquisaService(val db: SessionUserRepository) {
             .responseString()
 
         if (response.statusCode != HttpStatus.OK.value()) {
-            val refreshResponse = tratarResponse(response, request, sessionUser)
+            val refreshResponse = spotifyService.tratarResponse(response, request, sessionUser)
             println(refreshResponse.third.get())
             return gson.fromJson(refreshResponse.third.get(), PodcastDetalheDto::class.java)
         }
@@ -77,7 +83,7 @@ class SpotifyPesquisaService(val db: SessionUserRepository) {
             .responseString()
 
         if (response.statusCode != HttpStatus.OK.value()) {
-            val refreshResponse = tratarResponse(response, request, sessionUser)
+            val refreshResponse = spotifyService.tratarResponse(response, request, sessionUser)
             println(refreshResponse.third.get())
             return gson.fromJson(refreshResponse.third.get(), EpisodioDetalheDto::class.java)
         }
@@ -89,52 +95,5 @@ class SpotifyPesquisaService(val db: SessionUserRepository) {
 
     }
 
-    private fun tratarResponse(
-        response: Response,
-        request: Request,
-        sessionUser: SessionUserSpotify?
-    ): ResponseResultOf<String> {
-        when (response.statusCode) {
-            HttpStatus.BAD_REQUEST.value() -> throw Exception("Response Spotify Api: ${response.data}")
-            HttpStatus.UNAUTHORIZED.value() -> {
-                //refresh token pls
-                val newToken: String? = atualizarTokenDeAcesso(sessionUser)
-                request[Headers.AUTHORIZATION] = "Bearer $newToken"
-
-                return request.responseString()
-            }
-        }
-
-        return request.responseString()
-    }
-
-    private fun atualizarTokenDeAcesso(sessionUser: SessionUserSpotify?): String? {
-        val refreshToken = sessionUser?.refreshToken ?: throw Exception("Token expirado, necessario login novamente")
-
-        val (_, response, result) = Fuel.post(
-            SPOTIFY_API_TOKEN,
-            util.preparaBodyRequisicaoRefreshToken(refreshToken)
-        )
-            .header(Headers.CONTENT_TYPE, "application/x-www-form-urlencoded")
-            .header(Headers.AUTHORIZATION, util.prepararHeaderCredentialsID())
-            .responseString()
-
-        when (result) {
-            is Result.Success -> {
-                // requisicao ocorreu com sucesso, transformar em um objeto e salvar
-                val tokenDto: TokenSpotifyApiDto = gson.fromJson(result.get(), TokenSpotifyApiDto::class.java)
-
-                sessionUser.accessToken = tokenDto.access_token
-                sessionUser.refreshToken = tokenDto.refresh_token
-                sessionUser.expiresIn = tokenDto.expires_in
-                db.save(sessionUser)
-
-
-            }
-            else -> throw Exception("Response Spotify Api: ${response.data}")
-        }
-
-        return sessionUser.accessToken
-    }
 
 }

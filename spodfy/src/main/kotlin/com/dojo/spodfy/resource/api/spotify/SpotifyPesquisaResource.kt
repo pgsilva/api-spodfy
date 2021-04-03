@@ -15,10 +15,10 @@ class SpotifyPesquisaResource(val spotifyPesquisaService: SpotifyPesquisaService
     @GetMapping
     fun pesquisarApiSpotify(
         @RequestParam keyword: String?,
-        @RequestParam id: Long?
+        @RequestParam idUsuario: Long?
     ): ResponseEntity<PesquisaSpotifyApiDto>? {
         return try {
-            ResponseEntity.ok(spotifyPesquisaService.pesquisarPodcasts(keyword, id))
+            ResponseEntity.ok(spotifyPesquisaService.pesquisarPodcasts(keyword, idUsuario))
         } catch (e: Exception) {
             e.printStackTrace()
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
@@ -29,10 +29,10 @@ class SpotifyPesquisaResource(val spotifyPesquisaService: SpotifyPesquisaService
     @GetMapping("/episodio/{idPodcast}")
     fun pesquisarEpisodiosApiSpotify(
         @PathVariable idPodcast: String?,
-        @RequestParam id: Long?
+        @RequestParam idUsuario: Long?
     ): ResponseEntity<Any>? {
         return try {
-            ResponseEntity.ok(spotifyPesquisaService.pesquisarEpisodios(idPodcast, id))
+            ResponseEntity.ok(spotifyPesquisaService.pesquisarEpisodios(idPodcast, idUsuario))
         } catch (e: Exception) {
             e.printStackTrace()
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
@@ -43,10 +43,10 @@ class SpotifyPesquisaResource(val spotifyPesquisaService: SpotifyPesquisaService
     fun pesquisarEpisodiosApiSpotifyPaginado(
         @PathVariable idPodcast: String?,
         @PathVariable numberPage: String?,
-        @RequestParam id: Long?
+        @RequestParam idUsuario: Long?
     ): ResponseEntity<Any>? {
         return try {
-            ResponseEntity.ok(spotifyPesquisaService.pesquisarEpisodiosPaginado(idPodcast, id, numberPage))
+            ResponseEntity.ok(spotifyPesquisaService.pesquisarEpisodiosPaginado(idPodcast, idUsuario, numberPage))
         } catch (e: Exception) {
             e.printStackTrace()
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()

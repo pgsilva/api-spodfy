@@ -53,7 +53,9 @@ class AcompanhamentoService(
 
     private fun atualizarPodcast(podcastForm: PodcastPesquisaDto): Podcast {
         /**nao atualizamos o total de episodio pq ele serve de referencia p o robo notificar */
+
         val podcast: Podcast = dbPodcast.findByIdPodcastSpotify(podcastForm.id) ?: Podcast()
+
         podcast.idPodcastSpotify = podcastForm.id
         podcast.nome = podcastForm.name
         podcast.descricao = podcastForm.description
@@ -62,7 +64,6 @@ class AcompanhamentoService(
         podcast.publicadora = podcastForm.publisher
         podcast.conteudoExplicito = podcastForm.explicit
 
-        dbPodcast.saveAndFlush(podcast)
         return podcast
     }
 
@@ -87,6 +88,10 @@ class AcompanhamentoService(
 
         dbSessionUserRepository.saveAndFlush(session)
 
+    }
+
+    fun listarTodosAcompanhamentosPorUsuarioID(idUsuario: Long): List<Acompanhamento?>? {
+        return db.findAllByUsuarioIdUsuario(idUsuario).toList()
     }
 
 
