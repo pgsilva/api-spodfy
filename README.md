@@ -16,5 +16,11 @@
 ## Solução
 Uma aplicação que consome a API publica do Spotify® e permite que o usuário se autentique com seu perfil e selecione seus poscasts favoritos para serem monitorados e assim que um episódio novo sair seja notificado.
 
+## Execução CLI
+Toda a aplicação foi desenvolvida em ambiente Java e Gradle, então basta executar os seguintes comandos na pasta /spodfy para executá-lo.
 
+```bash
+$  ./gradlew clean build
+$  ./gradlew bootRun
+```  
 
