@@ -5,7 +5,6 @@
 [![Miles Morales](https://img.shields.io/badge/dev-miles%20morales-blueviolet?style=flat-square)](https://github.com/pgsilva)
 [![Git Hub Stars](https://img.shields.io/github/stars/pgsilva?logo=github&style=flat-square)](https://github.com/pgsilva/api-spodfy-kotlin)
 [![Gradle](https://img.shields.io/badge/Gradle-v6.8.3-brightgreen?logo=gradle&style=flat-square)](https://gradle.org/releases/)
-[![Docker Build Status](https://img.shields.io/docker/build/pgsilva/api-spodfy-kotlin?logo=docker&style=flat-square)]
 
 
 ## Objetivo
