@@ -1,6 +1,7 @@
 package com.dojo.spodfy.service
 
 import com.dojo.spodfy.model.PesquisaSpotifyApiDto
+import com.dojo.spodfy.model.PesquisaUsuarioDto
 import com.dojo.spodfy.repository.PodcastRepository
 import com.dojo.spodfy.repository.SessionUserRepository
 import com.dojo.spodfy.service.api.spotify.SpotifyRequestUtil
@@ -30,7 +31,7 @@ class PodcastService(val db: PodcastRepository, val dbSessionUserRepository: Ses
         return db.findAll().toList()
     }
 
-    fun listarTodosPodcastSpotifyPorUsuarioID(idUsuario: Long?): PesquisaSpotifyApiDto? {
+    fun listarTodosPodcastSpotifyPorUsuarioID(idUsuario: Long?): PesquisaUsuarioDto? {
         val sessionUser: SessionUserSpotify? = dbSessionUserRepository.findByUsuarioIdUsuario(idUsuario)
 
         val (request, response, result) = Fuel.get(SPOTIFY_API_SHOWS_ME)
@@ -40,10 +41,10 @@ class PodcastService(val db: PodcastRepository, val dbSessionUserRepository: Ses
         if (response.statusCode != HttpStatus.OK.value()) {
             val refreshResponse = spotifyService.tratarResponse(response, request, sessionUser)
             println(refreshResponse.third.get())
-            return gson.fromJson(refreshResponse.third.get(), PesquisaSpotifyApiDto::class.java)
+            return gson.fromJson(refreshResponse.third.get(), PesquisaUsuarioDto::class.java)
         }
 
-        return gson.fromJson(result.get(), PesquisaSpotifyApiDto::class.java)
+        return gson.fromJson(result.get(), PesquisaUsuarioDto::class.java)
 
     }
 }
