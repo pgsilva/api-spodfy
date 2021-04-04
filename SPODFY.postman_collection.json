@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "3f8e781f-1045-421d-8e36-680e7a4f9a83",
+		"name": "SPODFY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/isAlive",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"isAlive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "redirect_login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/redirect_login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"redirect_login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sessoes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sessoes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pesquisa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pesquisa?keyword=nerdcast&idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pesquisa"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "nerdcast"
+						},
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "episodio/{idPodcast}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pesquisa/episodio/22Wgt4ASeaw8mmoqAWNUn1?idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pesquisa",
+						"episodio",
+						"22Wgt4ASeaw8mmoqAWNUn1"
+					],
+					"query": [
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "episodio/{idPodcast}?page={page}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pesquisa/episodio/22Wgt4ASeaw8mmoqAWNUn1/pagina/0?idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pesquisa",
+						"episodio",
+						"22Wgt4ASeaw8mmoqAWNUn1",
+						"pagina",
+						"0"
+					],
+					"query": [
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acompanhamento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/acompanhamento",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acompanhamento/usuario/{idUsuario}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/acompanhamento/usuario/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhamento",
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acompanhamento/usuario/{idUsuario}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"observacao\": \"teste NerdCast\",\r\n    \"diaSemana\": \"sexta-feira\",\r\n    \"horario\": null,\r\n    \"podcast\":{\r\n                \"available_markets\": [\r\n                    \"AD\",\r\n                    \"AE\",\r\n                    \"AG\",\r\n                    \"AL\",\r\n                    \"AM\",\r\n                    \"AR\",\r\n                    \"AT\",\r\n                    \"AU\",\r\n                    \"BA\",\r\n                    \"BB\",\r\n                    \"BE\",\r\n                    \"BF\",\r\n                    \"BG\",\r\n                    \"BH\",\r\n                    \"BJ\",\r\n                    \"BO\",\r\n                    \"BR\",\r\n                    \"BS\",\r\n                    \"BT\",\r\n                    \"BW\",\r\n                    \"BZ\",\r\n                    \"CA\",\r\n                    \"CH\",\r\n                    \"CL\",\r\n                    \"CO\",\r\n                    \"CR\",\r\n                    \"CV\",\r\n                    \"CW\",\r\n                    \"CY\",\r\n                    \"CZ\",\r\n                    \"DE\",\r\n                    \"DK\",\r\n                    \"DM\",\r\n                    \"DO\",\r\n                    \"DZ\",\r\n                    \"EC\",\r\n                    \"EE\",\r\n                    \"ES\",\r\n                    \"FI\",\r\n                    \"FJ\",\r\n                    \"FM\",\r\n                    \"FR\",\r\n                    \"GB\",\r\n                    \"GD\",\r\n                    \"GE\",\r\n                    \"GH\",\r\n                    \"GM\",\r\n                    \"GR\",\r\n                    \"GT\",\r\n                    \"GW\",\r\n                    \"GY\",\r\n                    \"HK\",\r\n                    \"HN\",\r\n                    \"HR\",\r\n                    \"HT\",\r\n                    \"HU\",\r\n                    \"ID\",\r\n                    \"IE\",\r\n                    \"IL\",\r\n                    \"IN\",\r\n                    \"IS\",\r\n                    \"IT\",\r\n                    \"JM\",\r\n                    \"JO\",\r\n                    \"JP\",\r\n                    \"KE\",\r\n                    \"KI\",\r\n                    \"KN\",\r\n                    \"KW\",\r\n                    \"LB\",\r\n                    \"LC\",\r\n                    \"LI\",\r\n                    \"LR\",\r\n                    \"LS\",\r\n                    \"LT\",\r\n                    \"LU\",\r\n                    \"LV\",\r\n                    \"MA\",\r\n                    \"MC\",\r\n                    \"ME\",\r\n                    \"MG\",\r\n                    \"MH\",\r\n                    \"MK\",\r\n                    \"ML\",\r\n                    \"MT\",\r\n                    \"MU\",\r\n                    \"MV\",\r\n                    \"MW\",\r\n                    \"MX\",\r\n                    \"MY\",\r\n                    \"MZ\",\r\n                    \"NA\",\r\n                    \"NE\",\r\n                    \"NG\",\r\n                    \"NI\",\r\n                    \"NL\",\r\n                    \"NO\",\r\n                    \"NR\",\r\n                    \"NZ\",\r\n                    \"OM\",\r\n                    \"PA\",\r\n                    \"PE\",\r\n                    \"PG\",\r\n                    \"PH\",\r\n                    \"PL\",\r\n                    \"PS\",\r\n                    \"PT\",\r\n                    \"PW\",\r\n                    \"PY\",\r\n                    \"QA\",\r\n                    \"RO\",\r\n                    \"RS\",\r\n                    \"SB\",\r\n                    \"SC\",\r\n                    \"SE\",\r\n                    \"SG\",\r\n                    \"SI\",\r\n                    \"SK\",\r\n                    \"SL\",\r\n                    \"SM\",\r\n                    \"SN\",\r\n                    \"SR\",\r\n                    \"ST\",\r\n                    \"SV\",\r\n                    \"TH\",\r\n                    \"TL\",\r\n                    \"TN\",\r\n                    \"TO\",\r\n                    \"TR\",\r\n                    \"TT\",\r\n                    \"TV\",\r\n                    \"TW\",\r\n                    \"US\",\r\n                    \"UY\",\r\n                    \"VC\",\r\n                    \"VN\",\r\n                    \"VU\",\r\n                    \"WS\",\r\n                    \"XK\",\r\n                    \"ZA\"\r\n                ],\r\n                \"copyrights\": [],\r\n                \"description\": \"Somos uma igreja simples, contemporânea e comprometida com a excelência. Nossa missão é sermos iguais a Jesus para transformar o mundo.\",\r\n                \"episodes\": null,\r\n                \"explicit\": false,\r\n                \"external_urls\": {\r\n                    \"spotify\": \"https://open.spotify.com/show/129mfk8lw8qGYzGEBoN4Bo\"\r\n                },\r\n                \"href\": \"https://api.spotify.com/v1/shows/129mfk8lw8qGYzGEBoN4Bo\",\r\n                \"id\": \"129mfk8lw8qGYzGEBoN4Bo\",\r\n                \"images\": [\r\n                    {\r\n                        \"height\": 640,\r\n                        \"url\": \"https://i.scdn.co/image/098e43da284181ff57da86c9270d24a2882a1369\",\r\n                        \"width\": 640\r\n                    },\r\n                    {\r\n                        \"height\": 300,\r\n                        \"url\": \"https://i.scdn.co/image/4b051f5a4bdc9a8abbc2d840ed37bda6432922b9\",\r\n                        \"width\": 300\r\n                    },\r\n                    {\r\n                        \"height\": 64,\r\n                        \"url\": \"https://i.scdn.co/image/564b760ae94e816db3789e43c6a7a93e20abd1bc\",\r\n                        \"width\": 64\r\n                    }\r\n                ],\r\n                \"is_externally_hosted\": false,\r\n                \"languages\": [\r\n                    \"pt\"\r\n                ],\r\n                \"media_type\": \"audio\",\r\n                \"name\": \"Onda Dura\",\r\n                \"publisher\": \"Onda Dura\",\r\n                \"total_episodes\": 123,\r\n                \"type\": \"show\",\r\n                \"uri\": \"spotify:show:129mfk8lw8qGYzGEBoN4Bo\"\r\n            }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/acompanhamento/usuario/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhamento",
+						"usuario",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acompanhamento/{idUsuario}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPodcastSpotify\":\"22Wgt4ASeaw8mmoqAWNUn1\",\r\n    \"observacao\":\"teste\",\r\n    \"diaSemana\": \"sexta-feira\",\r\n    \"horario\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/acompanhamento/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhamento",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acompanhamento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idAcompanhamento\":3,\r\n    \"idPodcastSpotify\":\"1GLSDdk9CDEwziGNIlnb8a\",\r\n    \"observacao\":\"teste podpah\",\r\n    \"diaSemana\": \"sexta-feira\",\r\n    \"horario\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/acompanhamento/usuario/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acompanhamento",
+						"usuario",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "podcast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/podcast",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"podcast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "podcast/usuario/{idUsuario}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/podcast/usuario/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"podcast",
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuario/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/usuario/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuario/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/usuario/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "player/play",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uris\": [\"spotify:episode:2aIoD7kspYBuGnr44shzD2\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/player/play?idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"player",
+						"play"
+					],
+					"query": [
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "player/pause",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uris\": [\"spotify:episode:2aIoD7kspYBuGnr44shzD2\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/player/pause?idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"player",
+						"pause"
+					],
+					"query": [
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
