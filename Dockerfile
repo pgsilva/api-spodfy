@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 RUN mkdir /work
-COPY . /work
+COPY ./spodfy /work
 WORKDIR /work
 RUN /work/gradlew build
 RUN mv /work/build/libs/*.jar /work/app.jar
