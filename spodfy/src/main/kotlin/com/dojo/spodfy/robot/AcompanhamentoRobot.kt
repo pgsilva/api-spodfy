@@ -90,7 +90,7 @@ class AcompanhamentoRobot {
 
         }
 
-        logger.error("EXECUCAO ROBO DE NOTIFICACOES FINALIZADO!")
+        logger.info("EXECUCAO ROBO DE NOTIFICACOES FINALIZADO!")
         logger.info("############################################################################")
     }
 
