@@ -3,20 +3,13 @@ package com.dojo.spodfy.service.api.spotify
 import com.dojo.spodfy.model.EpisodioDetalheDto
 import com.dojo.spodfy.model.PesquisaSpotifyApiDto
 import com.dojo.spodfy.model.PodcastDetalheDto
-import com.dojo.spodfy.model.TokenSpotifyApiDto
 import com.dojo.spodfy.repository.SessionUserRepository
-import com.dojo.spodfy.service.AcompanhamentoService
 import com.dojo.spodfy.table.SessionUserSpotify
 import com.dojo.spodfy.util.SPOTIFY_API_SEARCH
 import com.dojo.spodfy.util.SPOTIFY_API_SEARCH_PAGE
 import com.dojo.spodfy.util.SPOTIFY_API_SEARCH_SHOWS
-import com.dojo.spodfy.util.SPOTIFY_API_TOKEN
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
-import com.github.kittinunf.fuel.core.Request
-import com.github.kittinunf.fuel.core.Response
-import com.github.kittinunf.fuel.core.ResponseResultOf
-import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -26,7 +19,6 @@ import org.springframework.stereotype.Service
 class SpotifyPesquisaService(val db: SessionUserRepository) {
 
     private val gson = Gson()
-    private val util: SpotifyRequestUtil = SpotifyRequestUtil()
 
     @set:Autowired
     lateinit var spotifyService: SpotifyService
