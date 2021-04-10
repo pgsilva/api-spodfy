@@ -427,6 +427,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "show",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BQC84WC7EvkxPGy5uWuNWP2GsRBrWhDW2YL2CR0NgwPVtiJqbkbQL4OQ9CsObUeb5ZWMdbcRVU_JsYkGufwVTXEG70dD_NvAjQueDNneaf3fLdeEoGpWqO6xIeOGYRW-v5q9MUVa7JPwbZ0iRPNTZB_izI5Unt_6LAbVAiiZK_j--unvUXsR6KrU9dEn4GkPJSK-VuKIwCeJfj8YOYx1QNRpBs-ATLyF4URZlI4nygF2Chvx4CzG-i7vqupGiFxw_10T8l5Kno9AC0rm_pdvhO2bb-f7_eluZUHUYpy3OIZ-",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/show?idUsuario=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"show"
+					],
+					"query": [
+						{
+							"key": "idUsuario",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

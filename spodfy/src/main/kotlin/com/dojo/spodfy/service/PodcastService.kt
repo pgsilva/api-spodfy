@@ -22,7 +22,6 @@ class PodcastService(val db: PodcastRepository, val dbSessionUserRepository: Ses
 
 
     private val gson = Gson()
-    private val util: SpotifyRequestUtil = SpotifyRequestUtil()
 
     @set:Autowired
     lateinit var spotifyService: SpotifyService

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/pesquisa")
-class SpotifyPesquisaResource(val spotifyPesquisaService: SpotifyPesquisaService) : BaseResource() {
+class SpotifySearchResource(val spotifyPesquisaService: SpotifyPesquisaService) : BaseResource() {
 
     @GetMapping
     fun pesquisarApiSpotify(

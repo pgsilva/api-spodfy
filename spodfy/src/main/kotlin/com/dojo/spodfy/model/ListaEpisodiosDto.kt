@@ -1,5 +1,5 @@
 package com.dojo.spodfy.model
 
 class ListaEpisodiosDto(
-    val uris: Array<String>?
+    val uris: Array<String?>?
 )
