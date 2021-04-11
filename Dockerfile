@@ -1,4 +1,5 @@
 FROM openjdk:8-jdk-alpine
+MAINTAINER mrmoralesu@gmail.com
 VOLUME /tmp
 RUN mkdir /work
 COPY ./spodfy /work
