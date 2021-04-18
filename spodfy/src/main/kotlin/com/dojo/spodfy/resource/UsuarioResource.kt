@@ -1,12 +1,8 @@
 package com.dojo.spodfy.resource
 
 import com.dojo.spodfy.service.UsuarioService
-import com.dojo.spodfy.table.Acompanhamento
-import com.dojo.spodfy.table.SessionUserSpotify
 import com.dojo.spodfy.table.Usuario
 import com.dojo.spodfy.util.BaseResource
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController

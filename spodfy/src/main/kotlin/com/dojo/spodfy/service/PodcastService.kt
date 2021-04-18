@@ -2,6 +2,7 @@ package com.dojo.spodfy.service
 
 import com.dojo.spodfy.model.PesquisaSpotifyApiDto
 import com.dojo.spodfy.model.PesquisaUsuarioDto
+import com.dojo.spodfy.model.PodcastPesquisaDto
 import com.dojo.spodfy.repository.PodcastRepository
 import com.dojo.spodfy.repository.SessionUserRepository
 import com.dojo.spodfy.service.api.spotify.SpotifyRequestUtil
@@ -45,5 +46,21 @@ class PodcastService(val db: PodcastRepository, val dbSessionUserRepository: Ses
 
         return gson.fromJson(result.get(), PesquisaUsuarioDto::class.java)
 
+    }
+
+    fun atualizarPodcast(podcastForm: PodcastPesquisaDto): Podcast {
+        /**nao atualizamos o total de episodio pq ele serve de referencia p o robo notificar */
+
+        val podcast: Podcast = db.findByIdPodcastSpotify(podcastForm.id) ?: Podcast()
+
+        podcast.idPodcastSpotify = podcastForm.id
+        podcast.nome = podcastForm.name
+        podcast.descricao = podcastForm.description
+        podcast.href = podcastForm.href
+        podcast.urlImagem = podcastForm.images?.firstOrNull()?.url
+        podcast.publicadora = podcastForm.publisher
+        podcast.conteudoExplicito = podcastForm.explicit
+
+        return podcast
     }
 }

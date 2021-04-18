@@ -3,11 +3,11 @@ package com.dojo.spodfy.robot
 import com.dojo.spodfy.model.PesquisaSpotifyApiDto
 import com.dojo.spodfy.model.PodcastPesquisaDto
 import com.dojo.spodfy.model.TokenSpotifyApiDto
-import com.dojo.spodfy.service.AcompanhamentoService
+import com.dojo.spodfy.service.FavoritoService
+import com.dojo.spodfy.service.UsuarioService
 import com.dojo.spodfy.service.api.spotify.SpotifyRequestUtil
-import com.dojo.spodfy.table.Acompanhamento
+import com.dojo.spodfy.table.Favorito
 import com.dojo.spodfy.table.Podcast
-import com.dojo.spodfy.table.SessionUserSpotify
 import com.dojo.spodfy.util.*
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
@@ -18,23 +18,23 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import javax.servlet.http.HttpServletRequest
 
 @Component
-class AcompanhamentoRobot {
+class FavoritoRobot {
 
     @set:Autowired
-    lateinit var acompanhamentoService: AcompanhamentoService
+    lateinit var favoritoService: FavoritoService
+
+    @set:Autowired
+    lateinit var usuarioService: UsuarioService
 
     private val gson = Gson()
     private val util: SpotifyRequestUtil = SpotifyRequestUtil()
 
-    private val logger = LoggerFactory.getLogger(AcompanhamentoRobot::class.java)
+    private val logger = LoggerFactory.getLogger(FavoritoRobot::class.java)
 
     /**
-     * Metodo responsavel por fazer o acompanhamento dos novos podcast
+     * Metodo responsavel por fazer o Favorito dos novos podcast
      * a cada hora faz um levantamento e notifica os usuarios correspondentes
      * */
     @Scheduled(fixedRate = 3600000)
@@ -46,11 +46,11 @@ class AcompanhamentoRobot {
         val usuarioGenerico: TokenSpotifyApiDto? = recuperarTokenGenerico()
 
 
-        val acompanhamentoTotal: List<Acompanhamento> = acompanhamentoService.listarTodosAcompanhamentos()
-        val agrupados: Map<String?, List<Acompanhamento>> = acompanhamentoTotal.groupBy { it.podcast?.idPodcastSpotify }
+        val favoritoTotal: List<Favorito> = favoritoService.listarTodosFavoritos()
+        val agrupados: Map<String?, List<Favorito>> = favoritoTotal.groupBy { it.podcast?.idPodcastSpotify }
 
-        agrupados.forEach { idPodcast, acompanhamentos ->
-            val podcastFisico: Podcast? = acompanhamentoService.pesquisarPodcastPorIDSpotify(idPodcast)
+        agrupados.forEach { idPodcast, Favoritos ->
+            val podcastFisico: Podcast? = favoritoService.pesquisarPodcastPorIDSpotify(idPodcast)
 
             val uri = String.format(SPOTIFY_API_SEARCH_SHOW_ROBOT, podcastFisico?.nomeLower())
             val (_, response, result) = Fuel.get(uri)
@@ -74,15 +74,15 @@ class AcompanhamentoRobot {
                     && (podcastApi.total_episodes!! > podcastFisico?.totalEpisodios!!)
                 ) {
                     //encontrou diff faz as notificacoes e atualiza o total
-                    acompanhamentoService.salvarNumeroTotalDePodcasts(
+                    favoritoService.salvarNumeroTotalDePodcasts(
                         pesquisaPodcast = podcastApi,
                         podcastFisico = podcastFisico
                     )
 
-                    acompanhamentos.forEach { acompanhamento ->
-                        println("Acompanhmento: ${acompanhamento.idAcompanhamento}")
-                        println("Usuario: ${acompanhamento.usuario?.nomeExibicao} - Email: ${acompanhamento.usuario?.email}")
-                        println("Podcast: ${acompanhamento.podcast?.nome} - ID: ${acompanhamento.podcast?.idPodcastSpotify}")
+                    Favoritos.forEach { Favorito ->
+                        println("Favorito: ${Favorito.idFavorito}")
+                        println("Usuario: ${Favorito.usuario?.nomeExibicao} - Email: ${Favorito.usuario?.email}")
+                        println("Podcast: ${Favorito.podcast?.nome} - ID: ${Favorito.podcast?.idPodcastSpotify}")
                     }
                 }
 
@@ -111,7 +111,7 @@ class AcompanhamentoRobot {
             is Result.Success -> {
                 logger.info("Usuário generico recuperado com sucesso!")
                 val tokenDto: TokenSpotifyApiDto = gson.fromJson(result.get(), TokenSpotifyApiDto::class.java)
-                acompanhamentoService.salvarSessionUserGenerico(tokenDto)
+                usuarioService.salvarSessionUserGenerico(tokenDto)
                 return tokenDto
             }
         }
