@@ -32,9 +32,9 @@ class SpotifyService(val db: SessionUserRepository, val dbUsuario: UsuarioReposi
      * @apiNote Esse meteodo recebe o code de permissao que a api retornou
      * e faz a requisicao para o token do oauth inclusive salva no banco
      */
-    fun atualizaPermissaoUsuarioLogado(code: String?, nrIpUser: String?): Usuario? {
+    fun atualizaPermissaoUsuarioLogado(code: String?, nrIpUser: String?, ambienteAWS: Boolean?): Usuario? {
 
-        val (_, _, result) = Fuel.post(SPOTIFY_API_TOKEN, util.preparaBodyRequisicaoToken(code))
+        val (_, _, result) = Fuel.post(SPOTIFY_API_TOKEN, util.preparaBodyRequisicaoToken(code, ambienteAWS))
             .header(Headers.CONTENT_TYPE, "application/x-www-form-urlencoded")
             .header(Headers.AUTHORIZATION, util.prepararHeaderCredentialsID())
             .responseString()
@@ -151,4 +151,5 @@ class SpotifyService(val db: SessionUserRepository, val dbUsuario: UsuarioReposi
 
         return sessionUser.accessToken
     }
+
 }
