@@ -41,7 +41,7 @@ class FavoritoRobot {
     fun gerarNotificacoes() {
 
         logger.info("############################################################################")
-        logger.info("EXECUCAO ROBO DE NOTIFICACOES")
+        logger.info("push notification robot starting")
 
         val usuarioGenerico: TokenSpotifyApiDto? = recuperarTokenGenerico()
 
@@ -58,8 +58,8 @@ class FavoritoRobot {
                 .responseString()
 
             if (response.statusCode != HttpStatus.OK.value()) {
-                logger.info("Nao foi possivel encontrar o podcast: $idPodcast pela API")
-                logger.error("EXECUCAO ROBO DE NOTIFICACOES FINALIZADO COM ERRO!")
+                logger.info("couldn't find podcast: $idPodcast from API")
+                logger.error("push notification robot finalized with errors!")
                 logger.info("############################################################################")
                 throw Exception("Nao foi possivel encontrar o podcast: $idPodcast pela API")
             }
@@ -90,12 +90,12 @@ class FavoritoRobot {
 
         }
 
-        logger.info("EXECUCAO ROBO DE NOTIFICACOES FINALIZADO!")
+        logger.info("push notification robot finalized")
         logger.info("############################################################################")
     }
 
     private fun recuperarTokenGenerico(): TokenSpotifyApiDto? {
-        logger.info("Recuperando usuario generico ...")
+        logger.info("retrieving generic user ...")
 
         val (_, _, result) = Fuel.post(SPOTIFY_API_TOKEN, util.preparaBodyRequisicaoTokenCredentialsID())
             .header(Headers.CONTENT_TYPE, "application/x-www-form-urlencoded")
@@ -105,11 +105,11 @@ class FavoritoRobot {
         when (result) {
             is Result.Failure -> {
                 val ex = result.getException()
-                logger.error("Não foi possivel recuperar o usuário generico!")
+                logger.error("was not possible to recover the generic user")
                 throw Exception(ex)
             }
             is Result.Success -> {
-                logger.info("Usuário generico recuperado com sucesso!")
+                logger.info("generic user successfully recovered!")
                 val tokenDto: TokenSpotifyApiDto = gson.fromJson(result.get(), TokenSpotifyApiDto::class.java)
                 usuarioService.salvarSessionUserGenerico(tokenDto)
                 return tokenDto
