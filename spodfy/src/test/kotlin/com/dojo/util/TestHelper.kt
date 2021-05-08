@@ -8,11 +8,12 @@ import java.io.FileReader
 
 import com.google.gson.Gson
 import com.google.gson.stream.JsonReader
+import java.io.FileNotFoundException
 
-
-fun prepararJsonPutPlay(): String {
-    val gson = Gson()
-    val reader = JsonReader(FileReader("resources/payload/put_play.json"))
-    return gson.toJson(reader)
+fun loadResource(name: String): String {
+    return object {}.javaClass.classLoader?.getResource(name)?.readText() ?: throw FileNotFoundException()
 }
+
+fun prepararJsonPutPlay(): String = loadResource("payload/put_play.json")
+
 

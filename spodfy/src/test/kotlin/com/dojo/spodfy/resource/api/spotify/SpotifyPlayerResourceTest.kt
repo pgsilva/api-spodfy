@@ -1,11 +1,17 @@
 package com.dojo.spodfy.resource.api.spotify
 
+import com.dojo.spodfy.SpodfyApplication
+import com.dojo.spodfy.repository.SessionUserRepository
 import com.dojo.spodfy.service.api.spotify.SpotifyPlayerService
+import com.dojo.spodfy.table.SessionUserSpotify
 import com.dojo.util.prepararJsonPutPlay
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
+import org.mockito.ArgumentMatchers.anyLong
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -16,23 +22,20 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@SpringBootTest
 @RunWith(SpringRunner::class)
-@WebMvcTest
+@SpringBootTest(classes = [SpodfyApplication::class])
+@AutoConfigureMockMvc
 class SpotifyPlayerResourceTest {
 
-    @InjectMocks
-    private lateinit var resource: SpotifyPlayerResource
+    @Autowired
+    private lateinit var mockMvc: MockMvc
 
     @MockBean
-    private lateinit var service: SpotifyPlayerService
-
-    @set:Autowired
-    lateinit var mockMvc: MockMvc
+    private lateinit var sessionUserRepository: SessionUserRepository
 
     @Test
     fun `executar player_play com sucesso`() {
-        println(prepararJsonPutPlay())
+        mockPlay()
         mockMvc.perform(
             MockMvcRequestBuilders
                 .put("/player/play")
@@ -43,6 +46,10 @@ class SpotifyPlayerResourceTest {
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    }
+
+    private fun mockPlay() {
+        whenever(sessionUserRepository.findByUsuarioIdUsuario(anyLong())).thenReturn(null)
     }
 
 
