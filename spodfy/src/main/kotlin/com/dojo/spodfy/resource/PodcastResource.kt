@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/podcast")
-class PodcastResourc(val podcastService: PodcastService) : BaseResource() {
+class PodcastResource(val podcastService: PodcastService) : BaseResource() {
 
     @GetMapping
     fun listarTodosPodcast(): List<Podcast> = podcastService.listarTodosPodcast()
