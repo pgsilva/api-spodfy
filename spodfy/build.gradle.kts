@@ -36,6 +36,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-alpha01")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("io.springfox:springfox-swagger2:2.7.0")
     implementation("io.springfox:springfox-swagger-ui:2.7.0")
