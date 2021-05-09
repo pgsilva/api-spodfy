@@ -23,10 +23,10 @@ $  ./gradlew clean build
 $  ./gradlew bootRun
 ```  
 ## Execução Docker
-Toda a aplicação foi publicado no Docker Hub, bastar fazer um **pull** e executá-lo usando a porta 8080.
+Toda a aplicação foi preparada para ser executada em ambiente docker
 ```bash
-$  docker pull milezz/spodfy
-$  docker run -it --rm -p 8080:8080 milezz/spodfy
+$  docker compose up 
+$  docker-compose up 
 ```  
 
 

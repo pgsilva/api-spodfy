@@ -1,0 +1,28 @@
+[
+  {
+    "idFavorito": 1,
+    "usuario": {
+      "idUsuario": 2,
+      "idUsuarioSpotify": "22og6murnc5rns2z5bdwkpdqy",
+      "pais": "BR",
+      "nomeExibicao": "Paulo Guilherme Silva",
+      "email": "pg__santos@hotmail.com",
+      "urlImagem": "https://i.scdn.co/image/ab6775700000ee859f7eacf91572045d961b450f",
+      "uri": "spotify:user:22og6murnc5rns2z5bdwkpdqy"
+    },
+    "podcast": {
+      "idPodcast": 1,
+      "idPodcastSpotify": "129mfk8lw8qGYzGEBoN4Bo",
+      "nome": "Onda Dura",
+      "descricao": "Somos uma igreja simples, contemporânea e comprometida com a excelência. Nossa missão é sermos iguais a Jesus para transformar o mundo.",
+      "href": "https://api.spotify.com/v1/shows/129mfk8lw8qGYzGEBoN4Bo",
+      "urlImagem": "https://i.scdn.co/image/098e43da284181ff57da86c9270d24a2882a1369",
+      "publicadora": "Onda Dura",
+      "conteudoExplicito": false,
+      "totalEpisodios": 0
+    },
+    "observacao": "teste NerdCast",
+    "diaSemana": "sexta-feira",
+    "horario": null
+  }
+]

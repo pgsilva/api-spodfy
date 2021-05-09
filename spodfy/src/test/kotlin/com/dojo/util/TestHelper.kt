@@ -1,13 +1,6 @@
 package com.dojo.util
 
-import com.fasterxml.jackson.databind.JsonNode
-import org.apache.logging.log4j.util.Strings
-import org.springframework.core.io.ClassPathResource
-import java.io.File
-import java.io.FileReader
-
-import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
+import com.dojo.spodfy.table.Usuario
 import java.io.FileNotFoundException
 
 fun loadResource(name: String): String {
@@ -16,4 +9,11 @@ fun loadResource(name: String): String {
 
 fun prepararJsonPutPlay(): String = loadResource("payload/put_play.json")
 
+fun prepararListaFavorito(): String = loadResource("payload/favoritos.json")
+
+fun prepararFavorito(): String = loadResource("payload/favorito.json")
+
+fun prepararFavoritoForm(): String = loadResource("payload/form_favorito.json")
+
+fun prepararFavoritoFormPut(): String = loadResource("payload/form_favorito_put.json")
 
