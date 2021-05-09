@@ -13,11 +13,16 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
+import com.mailjet.client.ClientOptions
+import com.mailjet.client.MailjetClient
+import com.mailjet.client.transactional.*
+import com.mailjet.client.transactional.response.SendEmailsResponse
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class FavoritoRobot {
@@ -79,10 +84,9 @@ class FavoritoRobot {
                         podcastFisico = podcastFisico
                     )
 
-                    Favoritos.forEach { Favorito ->
-                        println("Favorito: ${Favorito.idFavorito}")
-                        println("Usuario: ${Favorito.usuario?.nomeExibicao} - Email: ${Favorito.usuario?.email}")
-                        println("Podcast: ${Favorito.podcast?.nome} - ID: ${Favorito.podcast?.idPodcastSpotify}")
+                    Favoritos.forEach { favorito ->
+                        //prepar envio de emails
+                        enviarEmailNotificao(favorito)
                     }
                 }
 
@@ -92,6 +96,40 @@ class FavoritoRobot {
 
         logger.info("push notification robot finalized")
         logger.info("############################################################################")
+    }
+
+    private fun enviarEmailNotificao(favorito: Favorito) {
+        val options: ClientOptions = ClientOptions.builder()
+            .apiKey(MAIILJET_KEY)
+            .apiSecretKey(MAILJET_SECRET_KEY)
+            .build()
+
+        val client = MailjetClient(options)
+        val message1: TransactionalEmail = TransactionalEmail
+            .builder()
+            .to(SendContact(favorito.usuario?.email, favorito.usuario?.nomeExibicao))
+            .from(SendContact("pgsilva0698@gmail.com", "Equipe Spodfy"))
+            .htmlPart(TEMPLATE_EMAIL.format(favorito.usuario?.nomeExibicao, favorito.podcast?.nome))
+            .subject("Podcast quentinho!")
+            .trackOpens(TrackOpens.ENABLED)
+            //.attachment(Attachment.fromFile(attachmentPath))
+            .header("id-podcast", favorito.podcast?.idPodcastSpotify)
+            .customID(UUID.randomUUID().toString())
+            .build()
+
+        val request: SendEmailsRequest = SendEmailsRequest
+            .builder()
+            .message(message1) // you can add up to 50 messages per request
+            .build()
+
+        println("Favorito: ${favorito.idFavorito}")
+        println("Usuario: ${favorito.usuario?.nomeExibicao} - Email: ${favorito.usuario?.email}")
+        println("Podcast: ${favorito.podcast?.nome} - ID: ${favorito.podcast?.idPodcastSpotify}")
+        // act
+        val response: SendEmailsResponse = request.sendWith(client)
+        println(response.messages.toString())
+        println("email sent")
+
     }
 
     private fun recuperarTokenGenerico(): TokenSpotifyApiDto? {

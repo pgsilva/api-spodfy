@@ -40,6 +40,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("io.springfox:springfox-swagger2:2.7.0")
     implementation("io.springfox:springfox-swagger-ui:2.7.0")
+    implementation("com.mailjet:mailjet-client:5.1.1")
 }
 
 tasks.withType<KotlinCompile> {
