@@ -21,7 +21,7 @@ class HealthCheckResourceTest {
     private lateinit var mockMvc: MockMvc
 
     @Test
-    fun `is alive ?`() {
+    fun `is alive`() {
         mockMvc.perform(
             MockMvcRequestBuilders
                 .get("/isAlive")
