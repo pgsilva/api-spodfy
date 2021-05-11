@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3f8e781f-1045-421d-8e36-680e7a4f9a83",
+		"_postman_id": "bbd86c47-8502-4e97-adf2-c3bf080d11d6",
 		"name": "SPODFY",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -143,36 +143,55 @@
 			"response": []
 		},
 		{
-			"name": "acompanhamento",
+			"name": "favorito",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/acompanhamento",
+					"raw": "localhost:8080/favorito",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"acompanhamento"
+						"favorito"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "acompanhamento/usuario/{idUsuario}",
+			"name": "favorito{idFavorito}",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/acompanhamento/usuario/2",
+					"raw": "localhost:8080/favorito/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"acompanhamento",
+						"favorito",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "favorito/usuario/{idUsuario}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/favorito/usuario/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"favorito",
 						"usuario",
 						"2"
 					]
@@ -181,7 +200,7 @@
 			"response": []
 		},
 		{
-			"name": "acompanhamento/usuario/{idUsuario}",
+			"name": "favorito/usuario/{idUsuario}",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -195,22 +214,22 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/acompanhamento/usuario/4",
+					"raw": "localhost:8080/favorito/usuario/2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"acompanhamento",
+						"favorito",
 						"usuario",
-						"4"
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "acompanhamento/{idUsuario}",
+			"name": "favorito/{idFavorito}",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -224,13 +243,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/acompanhamento/4",
+					"raw": "localhost:8080/favorito/4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"acompanhamento",
+						"favorito",
 						"4"
 					]
 				}
@@ -238,13 +257,13 @@
 			"response": []
 		},
 		{
-			"name": "acompanhamento",
+			"name": "favorito/usuario/{idUsuario}",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idAcompanhamento\":3,\r\n    \"idPodcastSpotify\":\"1GLSDdk9CDEwziGNIlnb8a\",\r\n    \"observacao\":\"teste podpah\",\r\n    \"diaSemana\": \"sexta-feira\",\r\n    \"horario\": null\r\n}",
+					"raw": "{\r\n    \"idFavorito\":1,\r\n    \"idPodcastSpotify\":\"1GLSDdk9CDEwziGNIlnb8a\",\r\n    \"observacao\":\"teste podpah\",\r\n    \"diaSemana\": \"sexta-feira\",\r\n    \"horario\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,13 +271,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/acompanhamento/usuario/4",
+					"raw": "localhost:8080/favorito/usuario/4",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"acompanhamento",
+						"favorito",
 						"usuario",
 						"4"
 					]
