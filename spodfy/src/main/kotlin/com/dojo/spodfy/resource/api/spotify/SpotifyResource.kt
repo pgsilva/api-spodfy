@@ -18,7 +18,9 @@ import java.nio.charset.StandardCharsets
 class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
 
     @GetMapping("/redirect_login")
-    fun redirectLoginSpotify(): ResponseEntity<Any>? {
+    fun redirectLoginSpotify(
+        @RequestParam("port", required = true) port: String
+    ): ResponseEntity<Any>? {
         val scopes: String =
             "user-read-private " +
                     "user-read-email " +
@@ -33,7 +35,12 @@ class SpotifyResource(val spotifyService: SpotifyService) : BaseResource() {
         var projectUrl: String? = "https://accounts.spotify.com/authorize?response_type=code"
         projectUrl += "&client_id=$SPOTIFY_CLIENT_ID"
         projectUrl += "&scope=${URLEncoder.encode(scopes, StandardCharsets.UTF_8.toString())}"
-        projectUrl += "&redirect_uri=${URLEncoder.encode(SPOTIFY_REDIRECT_URI, StandardCharsets.UTF_8.toString())}"
+        projectUrl += "&redirect_uri=${
+            URLEncoder.encode(
+                String.format(SPOTIFY_REDIRECT_URI, port),
+                StandardCharsets.UTF_8.toString()
+            )
+        }"
 
         return try {
             //ResponseEntity.status(302).header("Location", projectUrl).build()

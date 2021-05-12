@@ -30,13 +30,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/redirect_login",
+					"raw": "localhost:8080/redirect_login?port=4200",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"redirect_login"
+					],
+					"query": [
+						{
+							"key": "port",
+							"value": "4200"
+						}
 					]
 				}
 			},
@@ -450,7 +456,7 @@
 		{
 			"name": "show",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Authorization",

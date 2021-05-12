@@ -36,6 +36,14 @@ class LogInterceptor : HandlerInterceptor {
         dataObject: Any,
         e: Exception?
     ) {
-        log.warn("[LOG] Request from ${request.remoteAddr} completed!")
+        log.warn(
+            "[LOG] Request from ${request.remoteAddr} completed! params: " +
+                    "${
+                        request.parameterMap.forEach {
+                            log.warn("key: ${it.key} |value:${it.value.firstOrNull()}")
+                        }
+                    }"
+        )
+        
     }
 }
